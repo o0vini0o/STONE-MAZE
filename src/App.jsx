@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router";
-import PuzzleContextProvider from "./context/puzzleContext";
+import { PuzzleContextProvider } from "./context/puzzleContext";
 import Home from "./pages/Home";
 import MainLayout from "./layouts/MainLayout";
 import Contact from "./pages/Contact";

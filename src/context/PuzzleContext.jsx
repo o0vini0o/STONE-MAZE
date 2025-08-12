@@ -1,9 +1,9 @@
 import { createContext, useState } from "react";
 import { createArray } from "../components/utils/createPuzzles";
 
-export const PuzzleContext = createContext();
+const PuzzleContext = createContext();
 
-const PuzzleContextProvider = ({ children }) => {
+export const PuzzleContextProvider = ({ children }) => {
   const [arr, setArr] = useState(createArray());
   const [move, setMove] = useState(0);
   const [isWin, setIsWin] = useState(false);
@@ -28,4 +28,4 @@ const PuzzleContextProvider = ({ children }) => {
     </PuzzleContext>
   );
 };
-export default PuzzleContextProvider;
+export default PuzzleContext;
