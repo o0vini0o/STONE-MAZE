@@ -24,7 +24,7 @@ const PuzzleBoard = () => {
           {arr.map((value, idx) => (
             <div key={idx} onClick={() => handleClick(idx)}>
               <img
-                src={`/src/img/${value}.png`}
+                src={`./src/img/${value}.png`}
                 className="w-full h-full object-cover"
               />
             </div>
