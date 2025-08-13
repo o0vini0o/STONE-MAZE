@@ -2,6 +2,7 @@ import usePuzzles from "../hooks/usePuzzles";
 import BestScore from "./BestScore";
 import NewGameBtn from "./NewGameBtn";
 import Score from "./Score";
+import Timer from "./Timer";
 
 const PuzzelMenu = () => {
   const { isWin, move } = usePuzzles();
@@ -12,6 +13,7 @@ const PuzzelMenu = () => {
         <Score />
         <BestScore />
       </div>
+      <Timer />
       {isWin && move != 0 && (
         <div>
           <span className="text-2xl font-bold">

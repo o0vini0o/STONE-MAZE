@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 import { createArray } from "../components/utils/createPuzzles";
 import { useEffect } from "react";
 import checkWin from "../components/utils/checkWin.js";
+import { useStopwatch } from "react-timer-hook";
 
 const PuzzleContext = createContext();
 
@@ -12,9 +13,16 @@ export const PuzzleContextProvider = ({ children }) => {
   const [bestScore, setBestScore] = useState(
     JSON.parse(localStorage.getItem("bestScore") || 0)
   );
+  const { milliseconds, seconds, minutes, start, pause, reset } = useStopwatch({
+    autoStart: false,
+    interval: 20,
+  });
+
   useEffect(() => {
     checkWin({ arr, setIsWin, bestScore, setBestScore, move });
-  }, [arr]);
+    if (move === 1) start();
+    if (isWin) pause();
+  }, [arr, move, isWin]);
   return (
     <PuzzleContext
       value={{
@@ -26,6 +34,12 @@ export const PuzzleContextProvider = ({ children }) => {
         setIsWin,
         bestScore,
         setBestScore,
+        milliseconds,
+        seconds,
+        minutes,
+        start,
+        pause,
+        reset,
       }}
     >
       {children}
