@@ -47,20 +47,20 @@ const Contact = () => {
         </div>
       )}
       {!openForm && (
-        <>
-          <p className="text-xl text-primary items-center">
-            thank you for your message!
-          </p>
-          <button
-            type="submit"
-            className="btn btn-primary w-32"
-            onClick={() => {
-              setOpenForm(true);
-            }}
-          >
-            return
-          </button>
-        </>
+        <div className="toast toast-center toast-middle">
+          <div className="alert alert-success flex flex-col">
+            <span>Message sent successfully. Thank you for your message!</span>
+            <button
+              type="submit"
+              className="btn btn-ghost w-32"
+              onClick={() => {
+                setOpenForm(true);
+              }}
+            >
+              return
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );
