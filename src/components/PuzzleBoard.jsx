@@ -8,12 +8,13 @@ const PuzzleBoard = () => {
     const emptyIndex = arr.indexOf(0);
     const neighborsArray = neighborsOfEmpty(emptyIndex);
     if (neighborsArray.some((n) => n === idx)) {
-      const newArr = [...arr];
+      let newArr = [...arr];
       [newArr[emptyIndex], newArr[idx]] = [newArr[idx], newArr[emptyIndex]];
       setArr(newArr);
       setMove((prev) => prev + 1);
     }
   };
+
   return (
     <div>
       <div className="w-[480px] h-[480px] bg-[#181e20] bg-cover rounded-xl mx-auto mt-2">
