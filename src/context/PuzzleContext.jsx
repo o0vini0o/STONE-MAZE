@@ -70,7 +70,7 @@ export const PuzzleContextProvider = ({ children }) => {
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
     checkWin({ arr, setIsWin, bestScore, setBestScore, move });
-    if (move === 1) start();
+    if (move >= 1) start();
     if (isWin) pause();
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
