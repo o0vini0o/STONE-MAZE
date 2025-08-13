@@ -19,7 +19,7 @@ export const neighborsOfEmpty = (emptyIndex) => {
   return neighbors;
 };
 
-export const createRandomArray = (arr) => {
+const createRandomArray = (arr) => {
   const emptyIndex = arr.indexOf(0); // 0-15
   const neighborsArray = neighborsOfEmpty(emptyIndex);
 

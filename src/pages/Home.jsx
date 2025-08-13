@@ -1,5 +1,4 @@
-import PuzzelMenu from "../components/PuzzelMenu";
-import PuzzleBoard from "../components/PuzzleBoard";
+import { PuzzelMenu, PuzzleBoard } from "../components";
 
 const Home = () => {
   return (

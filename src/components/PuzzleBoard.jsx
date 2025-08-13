@@ -1,10 +1,8 @@
 import { neighborsOfEmpty } from "./utils/createPuzzles.js";
 import usePuzzles from "../hooks/usePuzzles.js";
-import checkWin from "./utils/checkWin.js";
 
 const PuzzleBoard = () => {
-  const { arr, setArr, move, setMove, setIsWin, bestScore, setBestScore } =
-    usePuzzles();
+  const { arr, setArr, setMove } = usePuzzles();
 
   const handleClick = (idx) => {
     const emptyIndex = arr.indexOf(0);
@@ -15,7 +13,6 @@ const PuzzleBoard = () => {
       setArr(newArr);
       setMove((prev) => prev + 1);
     }
-    checkWin({ arr, setIsWin, bestScore, setBestScore, move });
   };
   return (
     <div>

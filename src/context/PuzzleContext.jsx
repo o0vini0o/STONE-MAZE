@@ -1,5 +1,7 @@
 import { createContext, useState } from "react";
 import { createArray } from "../components/utils/createPuzzles";
+import { useEffect } from "react";
+import checkWin from "../components/utils/checkWin.js";
 
 const PuzzleContext = createContext();
 
@@ -8,9 +10,11 @@ export const PuzzleContextProvider = ({ children }) => {
   const [move, setMove] = useState(0);
   const [isWin, setIsWin] = useState(false);
   const [bestScore, setBestScore] = useState(
-    JSON.parse(localStorage.getItem("bestScore")) || 0
+    JSON.parse(localStorage.getItem("bestScore") || 0)
   );
-
+  useEffect(() => {
+    checkWin({ arr, setIsWin, bestScore, setBestScore, move });
+  }, [arr]);
   return (
     <PuzzleContext
       value={{

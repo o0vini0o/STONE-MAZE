@@ -1,9 +1,7 @@
 import { Route, Routes } from "react-router";
 import { PuzzleContextProvider } from "./context/PuzzleContext";
-import Home from "./pages/Home";
+import { Home, Contact, Records } from "./pages";
 import MainLayout from "./layouts/MainLayout";
-import Contact from "./pages/Contact";
-import Records from "./pages/Records";
 
 function App() {
   return (

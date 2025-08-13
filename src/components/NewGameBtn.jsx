@@ -1,10 +1,10 @@
-import { creatInitArr } from "./utils/createPuzzles";
 import usePuzzles from "../hooks/usePuzzles";
+import { creatInitArr } from "./utils/createPuzzles";
 
 const NewGameBtn = () => {
   const { setArr, setIsWin, setMove } = usePuzzles();
   const handleClick = () => {
-    setArr(creatInitArr());
+    setArr(creatInitArr);
     setIsWin(false);
     setMove(0);
   };
