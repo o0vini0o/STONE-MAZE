@@ -18,6 +18,7 @@ export const PuzzleContextProvider = ({ children }) => {
     interval: 20,
   });
   const handleKeyDown = (e) => {
+    if (isWin) return;
     let newArr = [...arr];
     const emptyIndex = arr.indexOf(0);
     const emptyRow = Math.floor(emptyIndex / 4);

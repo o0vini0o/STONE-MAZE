@@ -2,9 +2,10 @@ import { neighborsOfEmpty } from "./utils/createPuzzles.js";
 import usePuzzles from "../hooks/usePuzzles.js";
 
 const PuzzleBoard = () => {
-  const { arr, setArr, setMove } = usePuzzles();
+  const { arr, setArr, setMove, isWin } = usePuzzles();
 
   const handleClick = (idx) => {
+    if (isWin) return;
     const emptyIndex = arr.indexOf(0);
     const neighborsArray = neighborsOfEmpty(emptyIndex);
     if (neighborsArray.some((n) => n === idx)) {
