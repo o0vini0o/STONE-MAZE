@@ -66,7 +66,8 @@ export const PuzzleContextProvider = ({ children }) => {
       default:
         return;
     }
-    setArr(newArr);
+    document.startViewTransition(() => setArr(newArr));
+    // setArr(newArr);
   };
   useEffect(() => {
     const getBestScore = async () => {
