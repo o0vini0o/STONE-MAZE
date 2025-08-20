@@ -6,16 +6,22 @@ import Timer from "./Timer";
 
 const PuzzelMenu = () => {
   const { isWin, move } = usePuzzles();
+
   return (
     <div className="flex flex-col items-center">
-      <div className=" flex gap-4 justify-center my-2">
-        <NewGameBtn />
-        <Score />
+      <div className="flex justify-between items-center gap-2 ">
+        <div className="flex flex-col">
+          <div className="flex gap-4 justify-center my-2">
+            <NewGameBtn />
+            <Score />
+          </div>
+          <Timer />
+        </div>
         <BestScore />
       </div>
-      <Timer />
+
       {isWin && move != 0 && (
-        <div>
+        <div className="my-4">
           <span className="text-2xl font-bold">
             🎉🎉🎉Congratulation!🎉🎉🎉
           </span>

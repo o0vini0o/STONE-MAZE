@@ -1,4 +1,4 @@
-import { neighborsOfEmpty } from "./utils/createPuzzles.js";
+import { neighborsOfEmpty } from "./utils";
 import usePuzzles from "../hooks/usePuzzles.js";
 
 const PuzzleBoard = () => {
@@ -6,13 +6,17 @@ const PuzzleBoard = () => {
 
   const handleClick = (idx) => {
     if (isWin) return;
+
     const emptyIndex = arr.indexOf(0);
     const neighborsArray = neighborsOfEmpty(emptyIndex);
+
     if (neighborsArray.some((n) => n === idx)) {
-      let newArr = [...arr];
-      [newArr[emptyIndex], newArr[idx]] = [newArr[idx], newArr[emptyIndex]];
-      setArr(newArr);
-      setMove((prev) => prev + 1);
+      document.startViewTransition(() => {
+        let newArr = [...arr];
+        [newArr[emptyIndex], newArr[idx]] = [newArr[idx], newArr[emptyIndex]];
+        setArr(newArr);
+        setMove((prev) => prev + 1);
+      });
     }
   };
 

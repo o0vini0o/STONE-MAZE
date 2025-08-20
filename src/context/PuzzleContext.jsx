@@ -1,7 +1,6 @@
 import { createContext, useState } from "react";
-import { createArray } from "../components/utils/createPuzzles";
+import { createArray, checkWin } from "../components/utils";
 import { useEffect } from "react";
-import checkWin from "../components/utils/checkWin.js";
 import { useStopwatch } from "react-timer-hook";
 
 const PuzzleContext = createContext();
@@ -10,9 +9,10 @@ export const PuzzleContextProvider = ({ children }) => {
   const [arr, setArr] = useState(createArray());
   const [move, setMove] = useState(0);
   const [isWin, setIsWin] = useState(false);
-  const [bestScore, setBestScore] = useState(
-    JSON.parse(localStorage.getItem("bestScore") || 0)
-  );
+  const [bestScore, setBestScore] = useState({
+    min_move: 0,
+    min_time: 0,
+  });
   const { milliseconds, seconds, minutes, start, pause, reset } = useStopwatch({
     autoStart: false,
     interval: 20,
@@ -69,10 +69,59 @@ export const PuzzleContextProvider = ({ children }) => {
     setArr(newArr);
   };
   useEffect(() => {
+    const getBestScore = async () => {
+      try {
+        const res = await fetch(
+          "http://localhost:3000/puzzle_scores/best_score"
+        );
+        if (!res.ok) {
+          const errorData = await res.json();
+          console.error(errorData.error);
+          return;
+        }
+        const data = await res.json();
+        setBestScore(data.best_score);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getBestScore();
+  }, []);
+  useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
-    checkWin({ arr, setIsWin, bestScore, setBestScore, move });
+    checkWin({ arr, setIsWin });
+
+    const postAndRefreschScore = async (score) => {
+      try {
+        const res = await fetch("http://localhost:3000/puzzle_scores", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(score),
+        });
+        if (!res.ok) {
+          const errorData = await res.json();
+          console.error(errorData);
+          return;
+        }
+        const data = await res.json();
+        setBestScore(data.best_score);
+      } catch (error) {
+        console.error(error);
+      }
+    };
     if (move >= 1) start();
-    if (isWin) pause();
+    if (isWin && move > 0) {
+      pause();
+      const elapsed_time_milliseconds =
+        (minutes * 60 + seconds) * 1000 + milliseconds;
+      const score = {
+        moves: move,
+        elapsed_time_milliseconds: elapsed_time_milliseconds,
+      };
+      postAndRefreschScore(score);
+    }
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };

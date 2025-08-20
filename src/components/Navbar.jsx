@@ -2,8 +2,10 @@ import { Link } from "react-router";
 
 const Navbar = () => {
   return (
-    <header className="flex flex-col items-center md:flex-row justify-between p-4">
-      <h1 className=" btn btn-ghost text-3xl text-center">Stone Maze</h1>
+    <header className="flex flex-col items-center md:flex-row justify-between p-8">
+      <Link className="btn btn-neutral" to="/">
+        <h1 className=" btn btn-ghost text-3xl text-center p-2">Stone Maze</h1>{" "}
+      </Link>
       <nav>
         <ul className="flex flex-col sm:flex-row gap-2">
           <Link className="btn btn-neutral" to="/">
